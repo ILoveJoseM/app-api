@@ -20,5 +20,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//获取应用token（登录）
 Route::get("/token/get","TokenController@getToken");
 

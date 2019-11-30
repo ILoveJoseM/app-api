@@ -5,3 +5,5 @@
 ````
 composer require "jose-chan/app-api"
 ````
+
+- 新增redis来管理token的过期问题

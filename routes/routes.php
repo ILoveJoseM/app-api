@@ -22,4 +22,6 @@ use Illuminate\Support\Facades\Route;
 
 //获取应用token（登录）
 Route::get("/token/get","TokenController@getToken");
+//应用请求参数验签
+Route::get("/sign/verify","SignController@verify");
 

@@ -21,17 +21,15 @@ use JoseChan\Base\Api\Logic\Logic;
 class TokenLogic extends Logic
 {
 
-    const TOKEN_KEY = "app_token:";
-
-    const EXPIRE_TIME = 7200;
     /**
      * 获取token
      * @param $app_id
      * @param $app_secret
+     * @param bool $refresh
      * @return array
      * @throws \Exception
      */
-    public function get($app_id, $app_secret)
+    public function get($app_id, $app_secret, $refresh = true)
     {
 
         $app_model = new App();
@@ -48,14 +46,14 @@ class TokenLogic extends Logic
             throw new \Exception("应用密钥不正确",1001);
         }
 
-        $key = self::TOKEN_KEY . $app->id;
+        if(!$refresh)
+        {
+            return ["token" => $app->getToken()];
+        }
 
         $token =  $app->initToken();
 
-        //设置token
-        Redis::set($key, $token);
-        Redis::expire($key, self::EXPIRE_TIME);
-
-        return ['token' => $token];
+        return ["token" => $token];
     }
+
 }

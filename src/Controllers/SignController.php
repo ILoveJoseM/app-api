@@ -40,7 +40,7 @@ class SignController extends Controller
         return $this->response(
             SignLogic::getInstance()->verify(
                 $data['app_id'],
-                $data['parameter_string'],
+                urldecode($data['parameter_string']),
                 $data['sign'],
                 $data['sign_type']
             )
